@@ -1,5 +1,5 @@
-
-import React from 'react'
+"use client"
+import React, { useEffect } from 'react'
 import Button from '@mui/material/Button'
 import { Stack, Typography } from '@mui/material'
 import Image from 'next/image'
@@ -7,6 +7,7 @@ import demo from "../assets/1668511774.png"
 import Link from 'next/link'
 
 function page() {
+ 
   return (
     <Stack direction={"column"} spacing={2} py={2}>
       <Typography className="bold" fontSize={30} color={"#090029"} textAlign={"center"}>

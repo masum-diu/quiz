@@ -1,12 +1,17 @@
 import { AppBar, Box, Stack, Toolbar, Typography, Button, List, ListItem, ListItemText, Drawer, IconButton } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from '@mui/icons-material/Close';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
-import { useAuth, UserButton, useClerk } from "@clerk/nextjs";
+import { useAuth, UserButton, useClerk, useUser } from "@clerk/nextjs";
 
 const Layout = ({ children }) => {
     const [drawerOpen, setDrawerOpen] = useState(false);
+    
+    // console.log(user.primaryEmailAddress.emailAddress
+    // )
+
+   
     const { userId } = useAuth();
     const { signOut } = useClerk();
 
@@ -27,7 +32,8 @@ const Layout = ({ children }) => {
             console.error("Failed to sign out:", error);
         }
     };
-
+   // Dependency array, call whenever `user` changes
+    
     const drawerContent = (
         <Box
             sx={{ width: 250 }}
@@ -68,7 +74,7 @@ const Layout = ({ children }) => {
                         </ListItem>
                     </>
                 ) : (
-                    <Link href="/sign-in" passHref style={{textDecoration:"none",color:"inherit"}}>
+                    <Link href="/sign-in" passHref style={{ textDecoration: "none", color: "inherit" }}>
                         <ListItem button>
                             <ListItemText primary="Sign In" />
                         </ListItem>

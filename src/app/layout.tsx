@@ -12,7 +12,7 @@ export default function RootLayout({
 }>) {
 
     return (
-        <ClerkProvider>
+        <ClerkProvider afterSignUpUrl={"/quiz-play"}>
             <html lang="en">
 
                 <ThemeProvider theme={theme}>
