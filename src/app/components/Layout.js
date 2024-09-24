@@ -7,11 +7,6 @@ import { useAuth, UserButton, useClerk, useUser } from "@clerk/nextjs";
 
 const Layout = ({ children }) => {
     const [drawerOpen, setDrawerOpen] = useState(false);
-    
-    // console.log(user.primaryEmailAddress.emailAddress
-    // )
-
-   
     const { userId } = useAuth();
     const { signOut } = useClerk();
 
@@ -54,7 +49,7 @@ const Layout = ({ children }) => {
                         </Stack>} />
                 </ListItem>
 
-                {['Home', 'Quiz Play', 'Instruction', 'Privacy Policy', 'Terms and Conditions'].map((text) => (
+                {['Home', 'Quiz Play','Leader Board', 'Instruction', 'Privacy Policy', 'Terms and Conditions',].map((text) => (
                     <Link style={{ textDecoration: 'none', color: 'inherit' }} href={text === 'Home' ? '/' : `/${text.toLowerCase().replace(/\s+/g, '-')}`} passHref key={text}>
                         <ListItem button key={text} >
                             <ListItemText primary={text} />
@@ -65,8 +60,8 @@ const Layout = ({ children }) => {
                 {userId ? (
                     <>
                         <Link href={"/"} passHref>
-                            <ListItem button>
-                                <UserButton />
+                            <ListItem button >
+                                <UserButton />  
                             </ListItem>
                         </Link>
                         <ListItem button onClick={handleSignOut}>
@@ -142,6 +137,9 @@ const Layout = ({ children }) => {
                     </Typography>
                     <Typography className="bold" fontSize={16} color={"rgba(255, 255, 255, 0.5)"}>
                         Instruction
+                    </Typography>
+                    <Typography className="bold" fontSize={16} color={"rgba(255, 255, 255, 0.5)"}>
+                        Leader Board
                     </Typography>
                 </Stack>
                 <Stack direction={"column"} spacing={2} sx={{ pb: 5, width: "90%", maxWidth: "1500px", margin: "0 auto", borderBottom: "1px solid rgb(0 0 0 / 15%)", }} >
