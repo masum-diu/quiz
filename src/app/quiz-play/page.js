@@ -4,12 +4,13 @@ import { Button, Paper, Stack, Typography, TextField, CircularProgress } from '@
 import React, { useEffect, useState } from 'react';
 import instance from '../api/api_instance';
 import { useUser } from '@clerk/nextjs';
+import Link from 'next/link';
 
 const Page = () => {
   const [inputCode, setInputCode] = useState('');
   const [submittedAnswers, setSubmittedAnswers] = useState([]);
   const [quizData, setQuizData] = useState(null);
-  const [quizDataresults, setQuizDataresults] = useState(null); 
+  const [quizDataresults, setQuizDataresults] = useState(null);
   const [isQuizStarted, setIsQuizStarted] = useState(false);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [showNextButton, setShowNextButton] = useState(false);
@@ -30,8 +31,10 @@ const Page = () => {
           const response = await instance.post('/social/login', {
             name: user?.fullName,
             email: user?.primaryEmailAddress?.emailAddress,
-            avatar:user?.imageUrl
+            avatar: user?.imageUrl,
+            code: inputCode
           });
+
           await localStorage.setItem('token', response.data.token);
         } catch (error) {
           console.error('Error during login:', error);
@@ -103,6 +106,7 @@ const Page = () => {
           total_question: totalQuestions,
           total_mark: totalMarks,
           consume_time: consumeTime,
+
         },
         {
           headers: {
@@ -113,6 +117,7 @@ const Page = () => {
       );
 
       // Set quiz results after successful submission
+      await localStorage.setItem("code", inputCode)
       setQuizDataresults(response?.data?.data);
     } catch (error) {
       console.error('Error submitting quiz:', error);
@@ -122,13 +127,13 @@ const Page = () => {
   // Timer to track the quiz time
   useEffect(() => {
     let timerInterval;
-  
+
     if (isQuizStarted && !quizDataresults) {  // Start the timer only if the quiz has started and results are not displayed
       timerInterval = setInterval(() => {
         setElapsedTime(prev => prev + 1); // Increment elapsed time every second
       }, 1000);
     }
-  
+
     // Clear the timer when the quiz ends (either due to submission or reaching the last question) or component unmounts
     return () => {
       if (timerInterval) {
@@ -162,7 +167,7 @@ const Page = () => {
       ) : currentQuestion && !quizDataresults ? (
         <Stack direction={'column'} spacing={2} textAlign="center">
           <Typography className="Regular" fontSize={12} textAlign={"right"}>
-          Time : {Math.floor(elapsedTime / 60)}m  {elapsedTime % 60}s
+            Time : {Math.floor(elapsedTime / 60)}m  {elapsedTime % 60}s
           </Typography>
           <Typography className="bold" fontSize={16}>
             Question {currentQuestionIndex + 1} of {quizData.length}
@@ -233,17 +238,29 @@ const Page = () => {
               {quizDataresults?.total_mark} of {quizDataresults?.total_question}
             </Typography>
             {quizDataresults?.total_mark === 0 ? (
-              <Typography className="Regular" fontSize={14}>
+
+              <> <Typography className="Regular" fontSize={14}>
                 You must study much harder!
               </Typography>
+                <Link href={'/leader-board'}> <Button variant="outlined" color="primary">
+                  check your rank
+                </Button></Link></>
             ) : quizDataresults?.total_mark === quizData?.length ? (
-              <Typography className="Regular" fontSize={14}>
+              <><Typography className="Regular" fontSize={14}>
                 Congratulations! You answered all questions correctly!
               </Typography>
+                <Link href={'/leader-board'}> <Button variant="outlined" color="primary">
+                  check your rank
+                </Button></Link></>
             ) : (
-              <Typography className="Regular" fontSize={14} >
+              <><Typography className="Regular" fontSize={14} >
                 Good effort! You scored {quizDataresults?.total_mark} out of {quizData?.length}
               </Typography>
+                <Link href={'/leader-board'}> <Button variant="outlined" color="primary">
+                  check your rank
+                </Button></Link>
+              </>
+
             )}
           </Stack>
         </Paper>
