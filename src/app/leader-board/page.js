@@ -6,7 +6,7 @@ import instance from '../api/api_instance';
 const page = () => {
   const [leaderboardData, setLeaderboardData] = useState(null);
   const [loading, setLoading] = useState(false)
-  // console.log(leaderboardData)
+   console.log(leaderboardData)
 
 
 
@@ -36,13 +36,14 @@ const page = () => {
   return (
     <Box>
       {loading ? <CircularProgress /> : <Box>
-        <Typography className='bold' color="initial" textAlign={"center"}>Leader Board</Typography>
+        <Typography className='bold' color="initial" fontSize={32} textAlign={"center"}>Leader Board</Typography>
         <Stack direction={"row"} justifyContent={"center"} mb={4} mt={2}>
 
           {topThreeUsers?.map((item, index) => (
             <Avatar
               key={index}
-              src={item.user.avatar} // Assuming avatar is the field holding the image URL
+              src={item.user.avatar}
+              imgProps={{ loading: "lazy" }}
               sx={{
                 //  mt: index === 0 ? 2 : index === 0 ?  : 7, // Adjust margin top based on position
                 width: 50,
@@ -58,10 +59,11 @@ const page = () => {
 
         <Paper elevation={3}>
           <TableContainer component={Paper} >
-            <Table sx={{ minWidth: 500, }} size="small" aria-label="a dense table">
+            <Table sx={{ minWidth: 550, }} size="small" aria-label="a dense table">
               <TableHead>
                 <TableRow>
                   <TableCell>Serial</TableCell>
+                  <TableCell>Logo</TableCell>
                   <TableCell>Name</TableCell>
                   <TableCell align='center'>Total Mark</TableCell>
                   <TableCell align='center'>Consume Time</TableCell>
@@ -78,8 +80,22 @@ const page = () => {
                       {index + 1}
                     </TableCell>
                     <TableCell >
+                      <Avatar
+                        key={index}
+                        src={row.user.avatar}
+                        imgProps={{ loading: "lazy" }}
+                        sx={{
+                          //  mt: index === 0 ? 2 : index === 0 ?  : 7, // Adjust margin top based on position
+                          width: 20,
+                          height: 20,
+                        
+                        }} 
+                      />
+                    </TableCell>
+                    <TableCell >
                       {row?.user?.name}
                     </TableCell>
+                   
                     <TableCell align='center'>
                       {row?.total_mark}
                     </TableCell>
