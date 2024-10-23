@@ -10,7 +10,9 @@ const Page = () => {
   const [inputCode, setInputCode] = useState('');
   const [submittedAnswers, setSubmittedAnswers] = useState([]);
   const [quizData, setQuizData] = useState(null);
+
   const [quizDataresults, setQuizDataresults] = useState(null);
+  console.log(quizDataresults)
   const [isQuizStarted, setIsQuizStarted] = useState(false);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [showNextButton, setShowNextButton] = useState(false);
@@ -118,6 +120,7 @@ const Page = () => {
 
       // Set quiz results after successful submission
       await localStorage.setItem("code", inputCode)
+      console.log(response)
       setQuizDataresults(response?.data?.data);
     } catch (error) {
       console.error('Error submitting quiz:', error);
@@ -249,16 +252,28 @@ const Page = () => {
               <><Typography className="Regular" fontSize={14}>
                 Congratulations! You answered all questions correctly!
               </Typography>
-                <Link href={'/leader-board'}> <Button variant="outlined" color="primary">
+                <Link href={'/leader-board'}> <Button fullWidth variant="outlined" color="primary">
                   check your rank
                 </Button></Link></>
             ) : (
               <><Typography className="Regular" fontSize={14} >
                 Good effort! You scored {quizDataresults?.total_mark} out of {quizData?.data?.length}
               </Typography>
-                <Link href={'/leader-board'}> <Button variant="outlined" color="primary">
+                <Link href={'/leader-board'}> <Button fullWidth variant="outlined" color="primary">
                   check your rank
                 </Button></Link>
+                {quizData?.link?.link ? (
+                  <Link href={quizData.link.link} target='_blank'>
+                    <Button variant="contained" color="primary" fullWidth>
+                      See more information
+                    </Button>
+                  </Link>
+                ) : (
+                  <Button variant="contained" color="primary" disabled fullWidth>
+                    See more information
+                  </Button>
+                )}
+
               </>
 
             )}
