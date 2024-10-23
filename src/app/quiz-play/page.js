@@ -21,7 +21,7 @@ const Page = () => {
   const [totalMarks, setTotalMarks] = useState(0);  // Track total marks
 
   const { user } = useUser();
-  const currentQuestion = quizData ? quizData[currentQuestionIndex] : null;
+  const currentQuestion = quizData?.data ? quizData?.data[currentQuestionIndex] : null;
 
   // Auto login only once when the user is loaded
   useEffect(() => {
@@ -91,9 +91,9 @@ const Page = () => {
   const handleSubmitQuiz = async () => {
     const token = await localStorage.getItem('token');
     try {
-      const totalQuestions = quizData.length;
+      const totalQuestions = quizData?.data.length;
       const totalMarks = submittedAnswers.reduce((total, answer) => {
-        const question = quizData.find(q => q.id === answer.questionId);
+        const question = quizData?.data.find(q => q.id === answer.questionId);
         return question && question.answer === answer.selectedOption ? total + parseInt(question.mark) : total;
       }, 0);
 
@@ -170,7 +170,7 @@ const Page = () => {
             Time : {Math.floor(elapsedTime / 60)}m  {elapsedTime % 60}s
           </Typography>
           <Typography className="bold" fontSize={16}>
-            Question {currentQuestionIndex + 1} of {quizData.length}
+            Question {currentQuestionIndex + 1} of {quizData?.data.length}
           </Typography>
 
           <Typography className="bold" fontSize={18} dangerouslySetInnerHTML={{ __html: currentQuestion.question }} />
@@ -222,9 +222,9 @@ const Page = () => {
           {showNextButton && (
             <Button
               variant="contained"
-              onClick={currentQuestionIndex === quizData.length - 1 ? handleSubmitQuiz : handleNextClick}
+              onClick={currentQuestionIndex === quizData?.data.length - 1 ? handleSubmitQuiz : handleNextClick}
             >
-              {currentQuestionIndex === quizData.length - 1 ? 'Submit' : 'Next'}
+              {currentQuestionIndex === quizData?.data.length - 1 ? 'Submit' : 'Next'}
             </Button>
           )}
         </Stack>
@@ -245,7 +245,7 @@ const Page = () => {
                 <Link href={'/leader-board'}> <Button variant="outlined" color="primary">
                   check your rank
                 </Button></Link></>
-            ) : quizDataresults?.total_mark === quizData?.length ? (
+            ) : quizDataresults?.total_mark === quizData?.data?.length ? (
               <><Typography className="Regular" fontSize={14}>
                 Congratulations! You answered all questions correctly!
               </Typography>
@@ -254,7 +254,7 @@ const Page = () => {
                 </Button></Link></>
             ) : (
               <><Typography className="Regular" fontSize={14} >
-                Good effort! You scored {quizDataresults?.total_mark} out of {quizData?.length}
+                Good effort! You scored {quizDataresults?.total_mark} out of {quizData?.data?.length}
               </Typography>
                 <Link href={'/leader-board'}> <Button variant="outlined" color="primary">
                   check your rank
