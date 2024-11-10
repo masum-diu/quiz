@@ -156,7 +156,7 @@ const Layout = ({ children }) => {
                     </Typography>
                 </Stack>
                 <Typography className="bold" fontSize={16} pt={3} textAlign={"center"} color={"rgba(0, 0, 0, 0.5)"}>
-                    Copyright <span style={{color:"#fff"}}>©</span>  2024 Made By EtherTech
+                    Copyright©2024 Made By EtherTech
                 </Typography>
             </Box>
         </Box>
