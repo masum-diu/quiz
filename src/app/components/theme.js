@@ -1,5 +1,5 @@
 import { createTheme } from "@mui/material/styles";
-const primary = "#073064";
+const primary = "#db0200";
 const secondary = "#FBB03B";
 const background = "#ffffff";
 const background2 = "#073064";

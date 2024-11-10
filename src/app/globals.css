@@ -10,30 +10,24 @@
   }
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap'); */
 
-
-body {
-  font-family: "Merriweather", serif;
- 
-}
 
 @font-face {
   font-family: 'Light';
-  src: url('../fonts/Merriweather-Light.ttf');
+  src: url('../fonts/Barlow-Light.ttf');
 }
 
 
 
 @font-face {
   font-family: 'Regular';
-  src: url('../fonts/Merriweather-Regular.ttf');
+  src: url('../fonts/Barlow-Regular.ttf');
 }
 
 
 @font-face {
   font-family: 'bold';
-  src: url('../fonts/Merriweather-Bold.ttf');
+  src: url('../fonts/Barlow-Bold.ttf');
 }
 
 .exterBold {

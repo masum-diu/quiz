@@ -27,8 +27,8 @@ const Layout = ({ children }) => {
             console.error("Failed to sign out:", error);
         }
     };
-   // Dependency array, call whenever `user` changes
-    
+    // Dependency array, call whenever `user` changes
+
     const drawerContent = (
         <Box
             sx={{ width: 250 }}
@@ -39,20 +39,18 @@ const Layout = ({ children }) => {
             <List>
                 <ListItem>
                     <ListItemText primary={
-                        <Stack direction={"row"} justifyContent={"space-between"} alignItems={"center"}>
-                            <Typography className="SemiBold" fontSize={40}>
-                                Logo
-                            </Typography>
-                            <IconButton size="small" aria-label="" onClick={toggleDrawer(false)} sx={{ border: "1px solid gray" }}>
-                                <CloseIcon sx={{ fontSize: 15 }} />
+                        <Stack direction={"row"} justifyContent={"space-between"} alignItems={"center"} sx={{bgcolor:"red",pr:2}}>
+                            <img src="/images/Quiz Logo White-13.png" alt="" width={90} height={90}  />
+                            <IconButton size="small" aria-label="" onClick={toggleDrawer(false)} sx={{ border: "1px solid #fff",  }}>
+                                <CloseIcon sx={{ fontSize: 15,color:"#fff", }} />
                             </IconButton>
                         </Stack>} />
                 </ListItem>
 
-                {['Home', 'Quiz Play','Leader Board', 'Instruction', 'Privacy Policy', 'Terms and Conditions',].map((text) => (
+                {['Home', 'Quiz Play', 'Leader Board', 'Instruction', 'Privacy Policy', 'Terms and Conditions',].map((text) => (
                     <Link style={{ textDecoration: 'none', color: 'inherit' }} href={text === 'Home' ? '/' : `/${text.toLowerCase().replace(/\s+/g, '-')}`} passHref key={text}>
-                        <ListItem button key={text} >
-                            <ListItemText primary={text} />
+                        <ListItem button key={text} className="bold" >
+                            <ListItemText className="bold"  primary={text} />
                         </ListItem>
                     </Link>
                 ))}
@@ -61,7 +59,7 @@ const Layout = ({ children }) => {
                     <>
                         <Link href={"/"} passHref>
                             <ListItem button >
-                                <UserButton />  
+                                <UserButton />
                             </ListItem>
                         </Link>
                         <ListItem button onClick={handleSignOut}>
@@ -81,7 +79,10 @@ const Layout = ({ children }) => {
 
     return (
         <Box>
-            <AppBar position="sticky" sx={{ padding: "0px", color: "#222222", bgcolor: "#ffff", boxShadow: "none", borderBottom: "1px solid rgb(0 0 0 / 15%)", }}>
+            <AppBar position="sticky" sx={{
+                padding: "0px", color: "#222222", boxShadow: "none", borderBottom: "1px solid rgb(0 0 0 / 15%)", backgroundImage: "url('/images/Banner-14.png')", backgroundSize: "cover", // Ensure the image covers the whole area
+                backgroundPosition: "center",
+            }}>
                 <Toolbar sx={{
                     width: "90%", maxWidth: "1500px", margin: "0 auto", padding: "0px", '@media (min-width: 600px)': {
                         paddingLeft: '0px',
@@ -90,10 +91,9 @@ const Layout = ({ children }) => {
                     height: 94
                 }}>
                     <Stack direction={"row"} width={"100%"} justifyContent={"space-between"} alignItems={"center"}>
-                        <Stack direction={"row"} spacing={3} alignItems={"center"}>
-                            <Typography className="SemiBold" fontSize={40}>
-                                Logo
-                            </Typography>
+                        <Stack direction={"row"} alignItems={"center"}>
+                            <img src="/images/Quiz Logo White-13.png" alt="" width={90} height={90} />
+                            <Typography className="bold" fontSize={35} color={"#fff"}>Quiz Plus</Typography>
                         </Stack>
 
                         {/* Hamburger menu for mobile */}
@@ -104,8 +104,9 @@ const Layout = ({ children }) => {
                             sx={{ display: { xs: 'flex' } }}
                             onClick={toggleDrawer(true)}
                         >
-                            <MenuIcon />
+                            <MenuIcon sx={{ color: '#fff' }} /> 
                         </IconButton>
+
                     </Stack>
                 </Toolbar>
             </AppBar>
@@ -119,42 +120,43 @@ const Layout = ({ children }) => {
                 {children}
             </Box>
 
-            <Box sx={{ backgroundColor: "#073064", height: 584, }}>
-                <Stack direction={"column"} spacing={2} py={3} sx={{ width: "90%", maxWidth: "1500px", margin: "0 auto", }} >
-                    <Typography className="SemiBold" fontSize={40} color={"#fff"}>
-                        Logo
-                    </Typography>
-                    <Typography className="bold" fontSize={16} textAlign={"justify"} color={"#fff"}>
+            <Box sx={{ backgroundColor: "#f0977d", py: 2,height:{lg:'72vh',xs:'100vh'} }}>
+                <Stack direction={"column"} spacing={2} sx={{ width: "90%", maxWidth: "1500px", margin: "0 auto", }} >
+                    <Stack direction={"row"} alignItems={"center"} >
+                        <img src="/images/Quiz Logo White-13.png" alt="" width={90} height={90} />
+                        <Typography className="bold" fontSize={35} color={"#fff"}>Quiz Plus</Typography>
+                    </Stack>
+                    <Typography className="bold" fontSize={16} textAlign={"justify"} >
                         Quiz made with key principles of a beautiful, effective, simple to use and better code quality with use of functional based component.
                     </Typography>
                 </Stack>
                 <Stack direction={"column"} spacing={2} sx={{ pb: 3, width: "90%", maxWidth: "1500px", margin: "0 auto", }} >
-                    <Typography className="bold" fontSize={16} color={"#fff"}>
+                    <Typography className="bold" fontSize={16} >
                         Menu
                     </Typography>
-                    <Typography className="bold" fontSize={16} color={"rgba(255, 255, 255, 0.5)"}>
+                    <Typography className="bold" fontSize={16} color={"rgba(0, 0, 0, 0.5)"}>
                         Quiz Play
                     </Typography>
-                    <Typography className="bold" fontSize={16} color={"rgba(255, 255, 255, 0.5)"}>
+                    <Typography className="bold" fontSize={16} color={"rgba(0, 0, 0, 0.5)"}>
                         Instruction
                     </Typography>
-                    <Typography className="bold" fontSize={16} color={"rgba(255, 255, 255, 0.5)"}>
+                    <Typography className="bold" fontSize={16} color={"rgba(0, 0, 0, 0.5)"}>
                         Leader Board
                     </Typography>
                 </Stack>
                 <Stack direction={"column"} spacing={2} sx={{ pb: 5, width: "90%", maxWidth: "1500px", margin: "0 auto", borderBottom: "1px solid rgb(0 0 0 / 15%)", }} >
-                    <Typography className="bold" fontSize={16} color={"#fff"}>
+                    <Typography className="bold" fontSize={16} >
                         Policy
                     </Typography>
-                    <Typography className="bold" fontSize={16} color={"rgba(255, 255, 255, 0.5)"}>
+                    <Typography className="bold" fontSize={16} color={"rgba(0, 0, 0, 0.5)"}>
                         Privacy Policy
                     </Typography>
-                    <Typography className="bold" fontSize={16} color={"rgba(255, 255, 255, 0.5)"}>
+                    <Typography className="bold" fontSize={16} color={"rgba(0, 0, 0, 0.5)"}>
                         Terms and Conditions
                     </Typography>
                 </Stack>
-                <Typography className="bold" fontSize={16} pt={3} textAlign={"center"} color={"rgba(255, 255, 255, 0.5)"}>
-                    Copyright © 2024 Made By EtherTech
+                <Typography className="bold" fontSize={16} pt={3} textAlign={"center"} color={"rgba(0, 0, 0, 0.5)"}>
+                    Copyright <span style={{color:"#fff"}}>©</span>  2024 Made By EtherTech
                 </Typography>
             </Box>
         </Box>
