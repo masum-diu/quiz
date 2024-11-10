@@ -120,7 +120,7 @@ const Layout = ({ children }) => {
                 {children}
             </Box>
 
-            <Box sx={{ backgroundColor: "#f0977d", py: 2,height:{lg:'72vh',xs:'100vh'} }}>
+            <Box sx={{ backgroundColor: "#f0977d", py: 2,height:"70vh" }}>
                 <Stack direction={"column"} spacing={2} sx={{ width: "90%", maxWidth: "1500px", margin: "0 auto", }} >
                     <Stack direction={"row"} alignItems={"center"} >
                         <img src="/images/Quiz Logo White-13.png" alt="" width={90} height={90} />
